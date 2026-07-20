@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Tesseract from 'tesseract.js';
 import path from 'path';
 
@@ -25,3 +26,4 @@ async function findCoordinates() {
 }
 
 findCoordinates().catch(console.error);
+

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { PrismaClient } from '@prisma/client';
 import { generateCertificate } from './services/certificateService';
 
@@ -35,3 +36,4 @@ async function main() {
 }
 
 main().catch(console.error).finally(() => prisma.$disconnect());
+

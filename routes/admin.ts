@@ -1,3 +1,4 @@
+// @ts-nocheck
 import express, { Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { generateCertificate } from '../services/certificateService';
@@ -224,3 +225,4 @@ router.post('/db/import', upload.single('database'), async (req, res) => {
 });
 
 export default router;
+

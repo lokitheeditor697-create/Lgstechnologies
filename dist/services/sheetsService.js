@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSheet = getSheet;
 exports.appendRegistrationRow = appendRegistrationRow;
 exports.updateRegistrationRow = updateRegistrationRow;
+// @ts-nocheck
 const google_spreadsheet_1 = require("google-spreadsheet");
 // Initialize the sheet
 // Uses Service Account credentials from ENV

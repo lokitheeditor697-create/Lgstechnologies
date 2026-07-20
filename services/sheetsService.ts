@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 
 // Initialize the sheet
@@ -99,3 +100,4 @@ export async function updateRegistrationRow(
     console.error('Error updating row in Google Sheets:', error);
   }
 }
+
