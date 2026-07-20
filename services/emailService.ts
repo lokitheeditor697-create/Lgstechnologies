@@ -5,8 +5,8 @@ import path from 'path';
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER || 'lgstechnologiess@gmail.com',
-    pass: (process.env.EMAIL_PASS || 'chvp ylpo vegq eajw').replace(/\s+/g, '')
+    user: process.env.SMTP_USER || process.env.EMAIL_USER || 'lgstechnologiess@gmail.com',
+    pass: (process.env.SMTP_PASS || process.env.EMAIL_PASS || 'chvp ylpo vegq eajw').replace(/\s+/g, '')
   }
 });
 
@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 export const sendOfferLetterEmail = async (studentEmail: string, studentName: string, domain: string, pdfBuffer: Uint8Array, fileName: string) => {
   try {
     const mailOptions = {
-      from: `"LGS Technologies" <${process.env.EMAIL_USER || 'lgstechnologiess@gmail.com'}>`,
+      from: `"LGS Technologies" <${process.env.SMTP_USER || process.env.EMAIL_USER || 'lgstechnologiess@gmail.com'}>`,
       to: studentEmail,
       subject: `Your Offer Letter from LGS Technologies - ${domain} Internship`,
       html: `
@@ -54,7 +54,7 @@ export const sendOfferLetterEmail = async (studentEmail: string, studentName: st
 export const sendCertificateEmail = async (studentEmail: string, studentName: string, domain: string, pdfBuffer: Buffer, fileName: string) => {
   try {
     const mailOptions = {
-      from: `"LGS Technologies" <${process.env.EMAIL_USER || 'lgstechnologiess@gmail.com'}>`,
+      from: `"LGS Technologies" <${process.env.SMTP_USER || process.env.EMAIL_USER || 'lgstechnologiess@gmail.com'}>`,
       to: studentEmail,
       subject: `Congratulations! Your Certificate from LGS Technologies`,
       html: `
