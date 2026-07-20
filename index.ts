@@ -14,6 +14,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.set('trust proxy', 1); // Trust Render's proxy for express-rate-limit
+
 // Security Middlewares
 app.use(helmet()); // Set security HTTP headers
 app.use(hpp()); // Prevent HTTP Parameter Pollution
