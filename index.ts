@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import path from 'path';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-const xss = require('xss-clean');
 import hpp from 'hpp';
 import authRoutes from './routes/auth';
 import internshipRoutes from './routes/internships';
@@ -17,7 +16,6 @@ const PORT = process.env.PORT || 5000;
 
 // Security Middlewares
 app.use(helmet()); // Set security HTTP headers
-app.use(xss()); // Prevent XSS attacks
 app.use(hpp()); // Prevent HTTP Parameter Pollution
 
 // Rate Limiting (200 requests per 15 minutes)
