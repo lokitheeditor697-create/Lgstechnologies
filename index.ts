@@ -28,7 +28,7 @@ app.use('/api', limiter);
 
 app.use(cors());
 app.use(express.json({ limit: '10kb' })); // Limit body size to prevent payload attacks
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(process.cwd(), 'public')));
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -42,3 +42,4 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+

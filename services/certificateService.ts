@@ -21,7 +21,7 @@ export async function generateCertificate(
       });
 
       const fileName = `certificate_${certificateId}.pdf`;
-      const publicDir = path.join(__dirname, '..', 'public', 'certificates');
+      const publicDir = path.join(process.cwd(), 'public', 'certificates');
       
       if (!fs.existsSync(publicDir)) {
         fs.mkdirSync(publicDir, { recursive: true });
@@ -31,8 +31,8 @@ export async function generateCertificate(
       const writeStream = fs.createWriteStream(filePath);
       doc.pipe(writeStream);
 
-      const templatePath = path.join(__dirname, '..', 'public', 'certificate-landscape.png');
-      const fontPath = path.join(__dirname, '..', 'public', 'fonts', 'GreatVibes-Regular.ttf');
+      const templatePath = path.join(process.cwd(), 'public', 'certificate-landscape.png');
+      const fontPath = path.join(process.cwd(), 'public', 'fonts', 'GreatVibes-Regular.ttf');
       
       if (fs.existsSync(fontPath)) {
         doc.registerFont('Cursive', fontPath);
@@ -114,8 +114,8 @@ export async function generateCertificateBuffer(
       doc.on('end', () => resolve(Buffer.concat(chunks)));
       doc.on('error', reject);
 
-      const templatePath = path.join(__dirname, '..', 'public', 'certificate-landscape.png');
-      const fontPath = path.join(__dirname, '..', 'public', 'fonts', 'GreatVibes-Regular.ttf');
+      const templatePath = path.join(process.cwd(), 'public', 'certificate-landscape.png');
+      const fontPath = path.join(process.cwd(), 'public', 'fonts', 'GreatVibes-Regular.ttf');
       
       if (fs.existsSync(fontPath)) {
         doc.registerFont('Cursive', fontPath);
@@ -170,4 +170,5 @@ export async function generateCertificateBuffer(
     }
   });
 }
+
 

@@ -4,7 +4,7 @@ import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 
 export async function generateOfferLetter(studentName: string, course: string, college: string, startDate: string, endDate: string, domain: string, certificateId: string): Promise<string> {
   // 1. Read the Template Image
-  const templatePath = path.join(__dirname, '..', 'public', 'offer_letter_template.png');
+  const templatePath = path.join(process.cwd(), 'public', 'offer_letter_template.png');
   const templateBytes = fs.readFileSync(templatePath);
 
   // 2. Create PDF and Embed Image
@@ -130,7 +130,7 @@ export async function generateOfferLetter(studentName: string, course: string, c
 
   // 3. Save PDF Document
   const fileName = `Offer_Letter_${studentName.replace(/\s+/g, '_')}_${certificateId}.pdf`;
-  const publicDir = path.join(__dirname, '..', 'public', 'offers');
+  const publicDir = path.join(process.cwd(), 'public', 'offers');
   if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true });
   }
@@ -144,7 +144,7 @@ export async function generateOfferLetter(studentName: string, course: string, c
 
 export async function generateOfferLetterBuffer(studentName: string, course: string, college: string, startDate: string, endDate: string, domain: string, certificateId: string): Promise<Uint8Array> {
   // 1. Read the Template Image
-  const templatePath = path.join(__dirname, '..', 'public', 'offer_letter_template.png');
+  const templatePath = path.join(process.cwd(), 'public', 'offer_letter_template.png');
   const templateBytes = fs.readFileSync(templatePath);
 
   // 2. Create PDF and Embed Image
@@ -245,3 +245,4 @@ export async function generateOfferLetterBuffer(studentName: string, course: str
 
   return await pdfDoc.save();
 }
+
