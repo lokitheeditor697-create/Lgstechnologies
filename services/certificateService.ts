@@ -57,47 +57,41 @@ export async function generateCertificate(
         }
         doc.text(studentName, 0, 305, { align: 'center', width: 841.89 });
 
-        // PARAGRAPH WITH EXACT INLINE BOLDING & CENTER ALIGNMENT
+        // EXECUTIVE PROFESSIONAL PARAGRAPH LAYOUT WITH INLINE BOLDING
         const fontSize = 11.5;
         doc.fontSize(fontSize).fillColor('#333333');
 
         const cleanCollege = (college && college.trim() && college !== 'College') ? college.trim() : '';
 
         if (cleanCollege) {
-          // Line 1: 'student of ' + cleanCollege + ', has successfully completed the'
+          // Line 1: 'student of ' + cleanCollege + ', has successfully completed the ' + domain
           doc.font('Helvetica');
           const w1 = doc.widthOfString('student of ');
           doc.font('Helvetica-Bold');
           const w2 = doc.widthOfString(cleanCollege);
           doc.font('Helvetica');
-          const w3 = doc.widthOfString(', has successfully completed the');
-          const startX1 = (841.89 - (w1 + w2 + w3)) / 2;
+          const w3 = doc.widthOfString(', has successfully completed the ');
+          doc.font('Helvetica-Bold');
+          const w4 = doc.widthOfString(`${domain}`);
+          const startX1 = (841.89 - (w1 + w2 + w3 + w4)) / 2;
 
           doc.font('Helvetica').text('student of ', startX1, 375, { continued: true })
              .font('Helvetica-Bold').text(cleanCollege, { continued: true })
-             .font('Helvetica').text(', has successfully completed the');
+             .font('Helvetica').text(', has successfully completed the ', { continued: true })
+             .font('Helvetica-Bold').text(`${domain}`);
         } else {
-          doc.font('Helvetica').text('has successfully completed the', 0, 375, { align: 'center', width: 841.89 });
+          doc.font('Helvetica').text('has successfully completed the ', 0, 375, { continued: true, align: 'center', width: 841.89 })
+             .font('Helvetica-Bold').text(`${domain}`);
         }
 
-        // Line 2: 'Full Stack Web Development' + ' internship program at LGS Technologies'
-        doc.font('Helvetica-Bold');
-        const w4 = doc.widthOfString(`${domain}`);
-        doc.font('Helvetica');
-        const w5 = doc.widthOfString(' internship program at LGS Technologies');
-        const startX2 = (841.89 - (w4 + w5)) / 2;
+        // Line 2: 'internship program at LGS Technologies from Start to End.'
+        doc.font('Helvetica').text(`internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}.`, 0, 394, { align: 'center', width: 841.89 });
 
-        doc.font('Helvetica-Bold').text(`${domain}`, startX2, 392, { continued: true })
-           .font('Helvetica').text(' internship program at LGS Technologies');
+        // Line 3: 'During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.'
+        doc.font('Helvetica').text('During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.', 0, 413, { align: 'center', width: 841.89 });
 
-        // Line 3: 'from Start to End. During this internship, the student'
-        doc.font('Helvetica').text(`from ${formattedStart} to ${formattedEnd}. During this internship, the student`, 0, 409, { align: 'center', width: 841.89 });
-
-        // Line 4: 'demonstrated dedication, enthusiasm, and outstanding performance.'
-        doc.font('Helvetica').text('demonstrated dedication, enthusiasm, and outstanding performance.', 0, 426, { align: 'center', width: 841.89 });
-
-        // Line 5: 'We wish the student all the best for their future endeavors.'
-        doc.font('Helvetica').text('We wish the student all the best for their future endeavors.', 0, 448, { align: 'center', width: 841.89 });
+        // Line 4: 'We wish the student all the best for their future endeavors.'
+        doc.font('Helvetica').text('We wish the student all the best for their future endeavors.', 0, 438, { align: 'center', width: 841.89 });
 
         // DATE (bottom left)
         doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
@@ -107,9 +101,9 @@ export async function generateCertificate(
         const signaturePath = path.join(process.cwd(), 'public', 'signature.png');
         const signaturePathAlt = path.join(process.cwd(), 'public', 'images', 'signature.png');
         if (fs.existsSync(signaturePath)) {
-          doc.image(signaturePath, 350, 470, { width: 105 });
+          doc.image(signaturePath, 355, 475, { width: 105 });
         } else if (fs.existsSync(signaturePathAlt)) {
-          doc.image(signaturePathAlt, 350, 470, { width: 105 });
+          doc.image(signaturePathAlt, 355, 475, { width: 105 });
         }
 
       } else {
@@ -186,7 +180,7 @@ export async function generateCertificateBuffer(
         }
         doc.text(studentName, 0, 305, { align: 'center', width: 841.89 });
 
-        // PARAGRAPH WITH EXACT INLINE BOLDING & CENTER ALIGNMENT
+        // EXECUTIVE PROFESSIONAL PARAGRAPH LAYOUT WITH INLINE BOLDING
         const fontSize = 11.5;
         doc.fontSize(fontSize).fillColor('#333333');
 
@@ -198,28 +192,23 @@ export async function generateCertificateBuffer(
           doc.font('Helvetica-Bold');
           const w2 = doc.widthOfString(cleanCollege);
           doc.font('Helvetica');
-          const w3 = doc.widthOfString(', has successfully completed the');
-          const startX1 = (841.89 - (w1 + w2 + w3)) / 2;
+          const w3 = doc.widthOfString(', has successfully completed the ');
+          doc.font('Helvetica-Bold');
+          const w4 = doc.widthOfString(`${domain}`);
+          const startX1 = (841.89 - (w1 + w2 + w3 + w4)) / 2;
 
           doc.font('Helvetica').text('student of ', startX1, 375, { continued: true })
              .font('Helvetica-Bold').text(cleanCollege, { continued: true })
-             .font('Helvetica').text(', has successfully completed the');
+             .font('Helvetica').text(', has successfully completed the ', { continued: true })
+             .font('Helvetica-Bold').text(`${domain}`);
         } else {
-          doc.font('Helvetica').text('has successfully completed the', 0, 375, { align: 'center', width: 841.89 });
+          doc.font('Helvetica').text('has successfully completed the ', 0, 375, { continued: true, align: 'center', width: 841.89 })
+             .font('Helvetica-Bold').text(`${domain}`);
         }
 
-        doc.font('Helvetica-Bold');
-        const w4 = doc.widthOfString(`${domain}`);
-        doc.font('Helvetica');
-        const w5 = doc.widthOfString(' internship program at LGS Technologies');
-        const startX2 = (841.89 - (w4 + w5)) / 2;
-
-        doc.font('Helvetica-Bold').text(`${domain}`, startX2, 392, { continued: true })
-           .font('Helvetica').text(' internship program at LGS Technologies');
-
-        doc.font('Helvetica').text(`from ${formattedStart} to ${formattedEnd}. During this internship, the student`, 0, 409, { align: 'center', width: 841.89 });
-        doc.font('Helvetica').text('demonstrated dedication, enthusiasm, and outstanding performance.', 0, 426, { align: 'center', width: 841.89 });
-        doc.font('Helvetica').text('We wish the student all the best for their future endeavors.', 0, 448, { align: 'center', width: 841.89 });
+        doc.font('Helvetica').text(`internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}.`, 0, 394, { align: 'center', width: 841.89 });
+        doc.font('Helvetica').text('During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.', 0, 413, { align: 'center', width: 841.89 });
+        doc.font('Helvetica').text('We wish the student all the best for their future endeavors.', 0, 438, { align: 'center', width: 841.89 });
 
         // DATE (bottom left)
         doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
@@ -229,9 +218,9 @@ export async function generateCertificateBuffer(
         const signaturePath = path.join(process.cwd(), 'public', 'signature.png');
         const signaturePathAlt = path.join(process.cwd(), 'public', 'images', 'signature.png');
         if (fs.existsSync(signaturePath)) {
-          doc.image(signaturePath, 380, 450, { width: 125 });
+          doc.image(signaturePath, 355, 475, { width: 105 });
         } else if (fs.existsSync(signaturePathAlt)) {
-          doc.image(signaturePathAlt, 380, 450, { width: 125 });
+          doc.image(signaturePathAlt, 355, 475, { width: 105 });
         }
 
       } else {
