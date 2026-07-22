@@ -46,25 +46,32 @@ async function generateCertificate(studentName, course, college, domain, startDa
                     doc.font('Helvetica-Bold').fontSize(40).fillColor('#333333');
                 }
                 doc.text(studentName, 0, 305, { align: 'center', width: 841.89 });
-                // PARAGRAPH
-                doc.font('Helvetica').fontSize(12).fillColor('#333333');
-                const certParagraph = (college && college.trim() && college !== 'College')
-                    ? `student of ${college.trim()}, has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`
-                    : `has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`;
-                doc.text(certParagraph, 150, 380, { align: 'center', width: 541.89, lineGap: 4 });
+                // PARAGRAPH WITH INLINE BOLD
+                doc.font('Helvetica').fontSize(11.5).fillColor('#333333');
+                if (college && college.trim() && college !== 'College') {
+                    doc.text('student of ', 140, 375, { continued: true })
+                        .font('Helvetica-Bold').text(`${college.trim()}`, { continued: true })
+                        .font('Helvetica').text(`, has successfully completed the `, { continued: true })
+                        .font('Helvetica-Bold').text(`${domain}`, { continued: true })
+                        .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`, { width: 561.89 });
+                }
+                else {
+                    doc.text('has successfully completed the ', 140, 375, { continued: true })
+                        .font('Helvetica-Bold').text(`${domain}`, { continued: true })
+                        .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`, { width: 561.89 });
+                }
                 // DATE (bottom left)
                 doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
                 doc.text(issueDate, 120, 508, { width: 140, align: 'center' });
                 // SIGNATURE (bottom right / center signature slot)
-                // Erase any old printed template signature with exact parchment background box
-                doc.rect(415, 465, 140, 40).fill('#FCFAF6');
+                doc.rect(405, 465, 140, 40).fill('#FCFAF6');
                 const signaturePath = path_1.default.join(process.cwd(), 'public', 'signature.png');
                 const signaturePathAlt = path_1.default.join(process.cwd(), 'public', 'images', 'signature.png');
                 if (fs_1.default.existsSync(signaturePath)) {
-                    doc.image(signaturePath, 420, 460, { width: 130 });
+                    doc.image(signaturePath, 405, 465, { width: 130 });
                 }
                 else if (fs_1.default.existsSync(signaturePathAlt)) {
-                    doc.image(signaturePathAlt, 420, 460, { width: 130 });
+                    doc.image(signaturePathAlt, 405, 465, { width: 130 });
                 }
             }
             else {
@@ -121,25 +128,32 @@ async function generateCertificateBuffer(studentName, course, college, domain, s
                     doc.font('Helvetica-Bold').fontSize(40).fillColor('#333333');
                 }
                 doc.text(studentName, 0, 305, { align: 'center', width: 841.89 });
-                // PARAGRAPH
-                doc.font('Helvetica').fontSize(12).fillColor('#333333');
-                const certParagraphBuf = (college && college.trim() && college !== 'College')
-                    ? `student of ${college.trim()}, has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`
-                    : `has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`;
-                doc.text(certParagraphBuf, 150, 380, { align: 'center', width: 541.89, lineGap: 4 });
+                // PARAGRAPH WITH INLINE BOLD
+                doc.font('Helvetica').fontSize(11.5).fillColor('#333333');
+                if (college && college.trim() && college !== 'College') {
+                    doc.text('student of ', 140, 375, { continued: true })
+                        .font('Helvetica-Bold').text(`${college.trim()}`, { continued: true })
+                        .font('Helvetica').text(`, has successfully completed the `, { continued: true })
+                        .font('Helvetica-Bold').text(`${domain}`, { continued: true })
+                        .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`, { width: 561.89 });
+                }
+                else {
+                    doc.text('has successfully completed the ', 140, 375, { continued: true })
+                        .font('Helvetica-Bold').text(`${domain}`, { continued: true })
+                        .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`, { width: 561.89 });
+                }
                 // DATE (bottom left)
                 doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
                 doc.text(issueDate, 120, 508, { width: 140, align: 'center' });
                 // SIGNATURE (bottom right / center signature slot)
-                // Erase any old printed template signature with exact parchment background box
-                doc.rect(415, 465, 140, 40).fill('#FCFAF6');
+                doc.rect(405, 465, 140, 40).fill('#FCFAF6');
                 const signaturePath = path_1.default.join(process.cwd(), 'public', 'signature.png');
                 const signaturePathAlt = path_1.default.join(process.cwd(), 'public', 'images', 'signature.png');
                 if (fs_1.default.existsSync(signaturePath)) {
-                    doc.image(signaturePath, 420, 460, { width: 130 });
+                    doc.image(signaturePath, 405, 465, { width: 130 });
                 }
                 else if (fs_1.default.existsSync(signaturePathAlt)) {
-                    doc.image(signaturePathAlt, 420, 460, { width: 130 });
+                    doc.image(signaturePathAlt, 405, 465, { width: 130 });
                 }
             }
             else {
