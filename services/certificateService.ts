@@ -59,17 +59,11 @@ export async function generateCertificate(
 
         // PARAGRAPH
         doc.font('Helvetica').fontSize(12).fillColor('#333333');
-        if (college && college.trim() && college !== 'College') {
-          doc.text('student of ', 150, 380, { align: 'center', width: 541.89, lineGap: 4, continued: true })
-             .font('Helvetica-Bold').text(`${college.trim()}`, { continued: true })
-             .font('Helvetica').text(`, has successfully completed the `, { continued: true })
-             .font('Helvetica-Bold').text(`${domain}`, { continued: true })
-             .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`);
-        } else {
-          doc.text('has successfully completed the ', 150, 385, { align: 'center', width: 541.89, lineGap: 4, continued: true })
-             .font('Helvetica-Bold').text(`${domain}`, { continued: true })
-             .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`);
-        }
+        const certParagraph = (college && college.trim() && college !== 'College')
+          ? `student of ${college.trim()}, has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`
+          : `has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`;
+
+        doc.text(certParagraph, 150, 380, { align: 'center', width: 541.89, lineGap: 4 });
 
         // DATE (bottom left)
         doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
@@ -163,17 +157,11 @@ export async function generateCertificateBuffer(
 
         // PARAGRAPH
         doc.font('Helvetica').fontSize(12).fillColor('#333333');
-        if (college && college.trim() && college !== 'College') {
-          doc.text('student of ', 150, 380, { align: 'center', width: 541.89, lineGap: 4, continued: true })
-             .font('Helvetica-Bold').text(`${college.trim()}`, { continued: true })
-             .font('Helvetica').text(`, has successfully completed the `, { continued: true })
-             .font('Helvetica-Bold').text(`${domain}`, { continued: true })
-             .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`);
-        } else {
-          doc.text('has successfully completed the ', 150, 385, { align: 'center', width: 541.89, lineGap: 4, continued: true })
-             .font('Helvetica-Bold').text(`${domain}`, { continued: true })
-             .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`);
-        }
+        const certParagraphBuf = (college && college.trim() && college !== 'College')
+          ? `student of ${college.trim()}, has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`
+          : `has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`;
+
+        doc.text(certParagraphBuf, 150, 380, { align: 'center', width: 541.89, lineGap: 4 });
 
         // DATE (bottom left)
         doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
