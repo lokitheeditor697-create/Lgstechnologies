@@ -73,9 +73,9 @@ export async function generateCertificate(
         const signaturePath = path.join(process.cwd(), 'public', 'signature.png');
         const signaturePathAlt = path.join(process.cwd(), 'public', 'images', 'signature.png');
         if (fs.existsSync(signaturePath)) {
-          doc.image(signaturePath, 405, 445, { width: 125 });
+          doc.image(signaturePath, 415, 455, { width: 125 });
         } else if (fs.existsSync(signaturePathAlt)) {
-          doc.image(signaturePathAlt, 405, 445, { width: 125 });
+          doc.image(signaturePathAlt, 415, 455, { width: 125 });
         }
 
       } else {
@@ -168,9 +168,9 @@ export async function generateCertificateBuffer(
         const signaturePath = path.join(process.cwd(), 'public', 'signature.png');
         const signaturePathAlt = path.join(process.cwd(), 'public', 'images', 'signature.png');
         if (fs.existsSync(signaturePath)) {
-          doc.image(signaturePath, 405, 445, { width: 125 });
+          doc.image(signaturePath, 415, 455, { width: 125 });
         } else if (fs.existsSync(signaturePathAlt)) {
-          doc.image(signaturePathAlt, 405, 445, { width: 125 });
+          doc.image(signaturePathAlt, 415, 455, { width: 125 });
         }
 
       } else {
