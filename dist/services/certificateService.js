@@ -18,15 +18,15 @@ async function generateCertificate(studentName, course, college, domain, startDa
                 margin: 0
             });
             const fileName = `certificate_${certificateId}.pdf`;
-            const publicDir = path_1.default.join(__dirname, '..', 'public', 'certificates');
+            const publicDir = path_1.default.join(process.cwd(), 'public', 'certificates');
             if (!fs_1.default.existsSync(publicDir)) {
                 fs_1.default.mkdirSync(publicDir, { recursive: true });
             }
             const filePath = path_1.default.join(publicDir, fileName);
             const writeStream = fs_1.default.createWriteStream(filePath);
             doc.pipe(writeStream);
-            const templatePath = path_1.default.join(__dirname, '..', 'public', 'certificate-landscape.png');
-            const fontPath = path_1.default.join(__dirname, '..', 'public', 'fonts', 'GreatVibes-Regular.ttf');
+            const templatePath = path_1.default.join(process.cwd(), 'public', 'certificate-landscape.png');
+            const fontPath = path_1.default.join(process.cwd(), 'public', 'fonts', 'GreatVibes-Regular.ttf');
             if (fs_1.default.existsSync(fontPath)) {
                 doc.registerFont('Cursive', fontPath);
             }
@@ -48,11 +48,32 @@ async function generateCertificate(studentName, course, college, domain, startDa
                 doc.text(studentName, 0, 305, { align: 'center', width: 841.89 });
                 // PARAGRAPH
                 doc.font('Helvetica').fontSize(12).fillColor('#333333');
-                const paragraphText = `has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and a strong willingness to learn.\n\nWe wish the student all the best for their future endeavors.`;
-                doc.text(paragraphText, 150, 385, { align: 'center', width: 541.89, lineGap: 4 });
+                if (college && college.trim() && college !== 'College') {
+                    doc.text('student of ', 150, 380, { align: 'center', width: 541.89, lineGap: 4, continued: true })
+                        .font('Helvetica-Bold').text(`${college.trim()}`, { continued: true })
+                        .font('Helvetica').text(`, has successfully completed the `, { continued: true })
+                        .font('Helvetica-Bold').text(`${domain}`, { continued: true })
+                        .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`);
+                }
+                else {
+                    doc.text('has successfully completed the ', 150, 385, { align: 'center', width: 541.89, lineGap: 4, continued: true })
+                        .font('Helvetica-Bold').text(`${domain}`, { continued: true })
+                        .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`);
+                }
                 // DATE (bottom left)
                 doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
                 doc.text(issueDate, 120, 508, { width: 140, align: 'center' });
+                // SIGNATURE (bottom right / center signature slot)
+                // Erase any old printed template signature with exact parchment background box
+                doc.rect(415, 465, 140, 40).fill('#FCFAF6');
+                const signaturePath = path_1.default.join(process.cwd(), 'public', 'signature.png');
+                const signaturePathAlt = path_1.default.join(process.cwd(), 'public', 'images', 'signature.png');
+                if (fs_1.default.existsSync(signaturePath)) {
+                    doc.image(signaturePath, 420, 460, { width: 130 });
+                }
+                else if (fs_1.default.existsSync(signaturePathAlt)) {
+                    doc.image(signaturePathAlt, 420, 460, { width: 130 });
+                }
             }
             else {
                 // Fallback drawing if the template isn't uploaded
@@ -64,7 +85,7 @@ async function generateCertificate(studentName, course, college, domain, startDa
             const frontendUrl = process.env.FRONTEND_URL || 'https://lgs-technlogies-prototype.vercel.app';
             const verificationUrl = `${frontendUrl}/verify?id=${certificateId}`;
             const qrImage = await qrcode_1.default.toDataURL(verificationUrl, { color: { dark: '#333333', light: '#ffffff' }, margin: 1 });
-            // Draw QR Code bottom right (moved left to avoid borders)
+            // Draw QR Code bottom right (original server alignment)
             doc.image(qrImage, 650, 470, { width: 60 });
             doc.font('Helvetica-Bold').fontSize(8).fillColor('#666666').text(`Scan to Verify`, 650, 535, { width: 60, align: 'center' });
             doc.font('Helvetica').fontSize(7).fillColor('#999999').text(`ID: ${certificateId}`, 640, 545, { width: 80, align: 'center' });
@@ -87,8 +108,8 @@ async function generateCertificateBuffer(studentName, course, college, domain, s
             doc.on('data', (chunk) => chunks.push(chunk));
             doc.on('end', () => resolve(Buffer.concat(chunks)));
             doc.on('error', reject);
-            const templatePath = path_1.default.join(__dirname, '..', 'public', 'certificate-landscape.png');
-            const fontPath = path_1.default.join(__dirname, '..', 'public', 'fonts', 'GreatVibes-Regular.ttf');
+            const templatePath = path_1.default.join(process.cwd(), 'public', 'certificate-landscape.png');
+            const fontPath = path_1.default.join(process.cwd(), 'public', 'fonts', 'GreatVibes-Regular.ttf');
             if (fs_1.default.existsSync(fontPath)) {
                 doc.registerFont('Cursive', fontPath);
             }
@@ -110,11 +131,32 @@ async function generateCertificateBuffer(studentName, course, college, domain, s
                 doc.text(studentName, 0, 305, { align: 'center', width: 841.89 });
                 // PARAGRAPH
                 doc.font('Helvetica').fontSize(12).fillColor('#333333');
-                const paragraphText = `has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and a strong willingness to learn.\n\nWe wish the student all the best for their future endeavors.`;
-                doc.text(paragraphText, 150, 385, { align: 'center', width: 541.89, lineGap: 4 });
+                if (college && college.trim() && college !== 'College') {
+                    doc.text('student of ', 150, 380, { align: 'center', width: 541.89, lineGap: 4, continued: true })
+                        .font('Helvetica-Bold').text(`${college.trim()}`, { continued: true })
+                        .font('Helvetica').text(`, has successfully completed the `, { continued: true })
+                        .font('Helvetica-Bold').text(`${domain}`, { continued: true })
+                        .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`);
+                }
+                else {
+                    doc.text('has successfully completed the ', 150, 385, { align: 'center', width: 541.89, lineGap: 4, continued: true })
+                        .font('Helvetica-Bold').text(`${domain}`, { continued: true })
+                        .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and outstanding performance.\n\nWe wish the student all the best for their future endeavors.`);
+                }
                 // DATE (bottom left)
                 doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
                 doc.text(issueDate, 120, 508, { width: 140, align: 'center' });
+                // SIGNATURE (bottom right / center signature slot)
+                // Erase any old printed template signature with exact parchment background box
+                doc.rect(415, 465, 140, 40).fill('#FCFAF6');
+                const signaturePath = path_1.default.join(process.cwd(), 'public', 'signature.png');
+                const signaturePathAlt = path_1.default.join(process.cwd(), 'public', 'images', 'signature.png');
+                if (fs_1.default.existsSync(signaturePath)) {
+                    doc.image(signaturePath, 420, 460, { width: 130 });
+                }
+                else if (fs_1.default.existsSync(signaturePathAlt)) {
+                    doc.image(signaturePathAlt, 420, 460, { width: 130 });
+                }
             }
             else {
                 doc.rect(20, 20, 801.89, 555.28).lineWidth(5).stroke('#1e3a8a');
@@ -124,10 +166,10 @@ async function generateCertificateBuffer(studentName, course, college, domain, s
             const frontendUrl = process.env.FRONTEND_URL || 'https://lgs-technlogies-prototype.vercel.app';
             const verificationUrl = `${frontendUrl}/verify?id=${certificateId}`;
             const qrImage = await qrcode_1.default.toDataURL(verificationUrl, { color: { dark: '#333333', light: '#ffffff' }, margin: 1 });
-            // Draw QR Code bottom right
-            doc.image(qrImage, 650, 470, { width: 60 });
-            doc.font('Helvetica-Bold').fontSize(8).fillColor('#666666').text(`Scan to Verify`, 650, 535, { width: 60, align: 'center' });
-            doc.font('Helvetica').fontSize(7).fillColor('#999999').text(`ID: ${certificateId}`, 640, 545, { width: 80, align: 'center' });
+            // Draw QR Code to the right of signature line
+            doc.image(qrImage, 595, 480, { width: 55 });
+            doc.font('Helvetica-Bold').fontSize(7.5).fillColor('#666666').text(`Scan to Verify`, 595, 540, { width: 55, align: 'center' });
+            doc.font('Helvetica').fontSize(6.5).fillColor('#999999').text(`ID: ${certificateId}`, 585, 549, { width: 75, align: 'center' });
             doc.end();
         }
         catch (error) {

@@ -10,7 +10,7 @@ const path_1 = __importDefault(require("path"));
 const pdf_lib_1 = require("pdf-lib");
 async function generateOfferLetter(studentName, course, college, startDate, endDate, domain, certificateId) {
     // 1. Read the Template Image
-    const templatePath = path_1.default.join(__dirname, '..', 'public', 'offer_letter_template.png');
+    const templatePath = path_1.default.join(process.cwd(), 'public', 'offer_letter_template.png');
     const templateBytes = fs_1.default.readFileSync(templatePath);
     // 2. Create PDF and Embed Image
     const pdfDoc = await pdf_lib_1.PDFDocument.create();
@@ -112,7 +112,7 @@ async function generateOfferLetter(studentName, course, college, startDate, endD
     drawText('Place: Chennai, India', startX, currentY, fontSize, false);
     // 3. Save PDF Document
     const fileName = `Offer_Letter_${studentName.replace(/\s+/g, '_')}_${certificateId}.pdf`;
-    const publicDir = path_1.default.join(__dirname, '..', 'public', 'offers');
+    const publicDir = path_1.default.join(process.cwd(), 'public', 'offers');
     if (!fs_1.default.existsSync(publicDir)) {
         fs_1.default.mkdirSync(publicDir, { recursive: true });
     }
@@ -123,7 +123,7 @@ async function generateOfferLetter(studentName, course, college, startDate, endD
 }
 async function generateOfferLetterBuffer(studentName, course, college, startDate, endDate, domain, certificateId) {
     // 1. Read the Template Image
-    const templatePath = path_1.default.join(__dirname, '..', 'public', 'offer_letter_template.png');
+    const templatePath = path_1.default.join(process.cwd(), 'public', 'offer_letter_template.png');
     const templateBytes = fs_1.default.readFileSync(templatePath);
     // 2. Create PDF and Embed Image
     const pdfDoc = await pdf_lib_1.PDFDocument.create();
