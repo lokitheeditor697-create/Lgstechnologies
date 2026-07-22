@@ -87,10 +87,10 @@ async function generateCertificate(studentName, course, college, domain, startDa
                 const signaturePath = path_1.default.join(process.cwd(), 'public', 'signature.png');
                 const signaturePathAlt = path_1.default.join(process.cwd(), 'public', 'images', 'signature.png');
                 if (fs_1.default.existsSync(signaturePath)) {
-                    doc.image(signaturePath, 350, 470, { width: 125 });
+                    doc.image(signaturePath, 350, 470, { width: 105 });
                 }
                 else if (fs_1.default.existsSync(signaturePathAlt)) {
-                    doc.image(signaturePathAlt, 350, 470, { width: 125 });
+                    doc.image(signaturePathAlt, 350, 470, { width: 105 });
                 }
             }
             else {

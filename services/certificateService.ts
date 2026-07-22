@@ -107,9 +107,9 @@ export async function generateCertificate(
         const signaturePath = path.join(process.cwd(), 'public', 'signature.png');
         const signaturePathAlt = path.join(process.cwd(), 'public', 'images', 'signature.png');
         if (fs.existsSync(signaturePath)) {
-          doc.image(signaturePath, 350, 470, { width: 125 });
+          doc.image(signaturePath, 350, 470, { width: 105 });
         } else if (fs.existsSync(signaturePathAlt)) {
-          doc.image(signaturePathAlt, 350, 470, { width: 125 });
+          doc.image(signaturePathAlt, 350, 470, { width: 105 });
         }
 
       } else {
