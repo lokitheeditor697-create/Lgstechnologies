@@ -96,10 +96,10 @@ export async function generateCertificate(
       const verificationUrl = `${frontendUrl}/verify?id=${certificateId}`;
       const qrImage = await QRCode.toDataURL(verificationUrl, { color: { dark: '#333333', light: '#ffffff' }, margin: 1 });
       
-      // Draw QR Code to the right of signature line
-      doc.image(qrImage, 595, 480, { width: 55 });
-      doc.font('Helvetica-Bold').fontSize(7.5).fillColor('#666666').text(`Scan to Verify`, 595, 540, { width: 55, align: 'center' });
-      doc.font('Helvetica').fontSize(6.5).fillColor('#999999').text(`ID: ${certificateId}`, 585, 549, { width: 75, align: 'center' });
+      // Draw QR Code bottom right (original server alignment)
+      doc.image(qrImage, 650, 470, { width: 60 });
+      doc.font('Helvetica-Bold').fontSize(8).fillColor('#666666').text(`Scan to Verify`, 650, 535, { width: 60, align: 'center' });
+      doc.font('Helvetica').fontSize(7).fillColor('#999999').text(`ID: ${certificateId}`, 640, 545, { width: 80, align: 'center' });
 
       doc.end();
 
