@@ -70,14 +70,12 @@ export async function generateCertificate(
         doc.text(issueDate, 120, 508, { width: 140, align: 'center' });
 
         // SIGNATURE (bottom right / center signature slot)
-        doc.rect(405, 465, 140, 40).fill('#FCFAF6');
-
         const signaturePath = path.join(process.cwd(), 'public', 'signature.png');
         const signaturePathAlt = path.join(process.cwd(), 'public', 'images', 'signature.png');
         if (fs.existsSync(signaturePath)) {
-          doc.image(signaturePath, 422, 472, { width: 95 });
+          doc.image(signaturePath, 415, 445, { width: 110 });
         } else if (fs.existsSync(signaturePathAlt)) {
-          doc.image(signaturePathAlt, 422, 472, { width: 95 });
+          doc.image(signaturePathAlt, 415, 445, { width: 110 });
         }
 
       } else {
@@ -167,14 +165,12 @@ export async function generateCertificateBuffer(
         doc.text(issueDate, 120, 508, { width: 140, align: 'center' });
 
         // SIGNATURE (bottom right / center signature slot)
-        doc.rect(405, 465, 140, 40).fill('#FCFAF6');
-
         const signaturePath = path.join(process.cwd(), 'public', 'signature.png');
         const signaturePathAlt = path.join(process.cwd(), 'public', 'images', 'signature.png');
         if (fs.existsSync(signaturePath)) {
-          doc.image(signaturePath, 422, 472, { width: 95 });
+          doc.image(signaturePath, 415, 445, { width: 110 });
         } else if (fs.existsSync(signaturePathAlt)) {
-          doc.image(signaturePathAlt, 422, 472, { width: 95 });
+          doc.image(signaturePathAlt, 415, 445, { width: 110 });
         }
 
       } else {
