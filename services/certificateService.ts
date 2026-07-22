@@ -59,8 +59,9 @@ export async function generateCertificate(
 
         // PARAGRAPH
         doc.font('Helvetica').fontSize(12).fillColor('#333333');
-        const paragraphText = `has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and a strong willingness to learn.\n\nWe wish the student all the best for their future endeavors.`;
-        doc.text(paragraphText, 150, 385, { align: 'center', width: 541.89, lineGap: 4 });
+        doc.text('has successfully completed the ', 150, 385, { align: 'center', width: 541.89, lineGap: 4, continued: true })
+           .font('Helvetica-Bold').text(`${domain}`, { continued: true })
+           .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and a strong willingness to learn.\n\nWe wish the student all the best for their future endeavors.`);
 
         // DATE (bottom left)
         doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
@@ -151,8 +152,9 @@ export async function generateCertificateBuffer(
 
         // PARAGRAPH
         doc.font('Helvetica').fontSize(12).fillColor('#333333');
-        const paragraphText = `has successfully completed the ${domain} internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and a strong willingness to learn.\n\nWe wish the student all the best for their future endeavors.`;
-        doc.text(paragraphText, 150, 385, { align: 'center', width: 541.89, lineGap: 4 });
+        doc.text('has successfully completed the ', 150, 385, { align: 'center', width: 541.89, lineGap: 4, continued: true })
+           .font('Helvetica-Bold').text(`${domain}`, { continued: true })
+           .font('Helvetica').text(` internship program at LGS Technologies from ${formattedStart} to ${formattedEnd}. During this internship, the student demonstrated dedication, enthusiasm, and a strong willingness to learn.\n\nWe wish the student all the best for their future endeavors.`);
 
         // DATE (bottom left)
         doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
