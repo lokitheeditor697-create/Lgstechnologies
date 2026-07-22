@@ -88,10 +88,10 @@ export async function generateCertificate(
       const verificationUrl = `${frontendUrl}/verify?id=${certificateId}`;
       const qrImage = await QRCode.toDataURL(verificationUrl, { color: { dark: '#333333', light: '#ffffff' }, margin: 1 });
       
-      // Draw QR Code bottom right (moved left to avoid borders)
-      doc.image(qrImage, 650, 470, { width: 60 });
-      doc.font('Helvetica-Bold').fontSize(8).fillColor('#666666').text(`Scan to Verify`, 650, 535, { width: 60, align: 'center' });
-      doc.font('Helvetica').fontSize(7).fillColor('#999999').text(`ID: ${certificateId}`, 640, 545, { width: 80, align: 'center' });
+      // Draw QR Code next to signature line
+      doc.image(qrImage, 560, 470, { width: 60 });
+      doc.font('Helvetica-Bold').fontSize(8).fillColor('#666666').text(`Scan to Verify`, 560, 535, { width: 60, align: 'center' });
+      doc.font('Helvetica').fontSize(7).fillColor('#999999').text(`ID: ${certificateId}`, 550, 545, { width: 80, align: 'center' });
 
       doc.end();
 
@@ -179,10 +179,10 @@ export async function generateCertificateBuffer(
       const verificationUrl = `${frontendUrl}/verify?id=${certificateId}`;
       const qrImage = await QRCode.toDataURL(verificationUrl, { color: { dark: '#333333', light: '#ffffff' }, margin: 1 });
       
-      // Draw QR Code bottom right
-      doc.image(qrImage, 650, 470, { width: 60 });
-      doc.font('Helvetica-Bold').fontSize(8).fillColor('#666666').text(`Scan to Verify`, 650, 535, { width: 60, align: 'center' });
-      doc.font('Helvetica').fontSize(7).fillColor('#999999').text(`ID: ${certificateId}`, 640, 545, { width: 80, align: 'center' });
+      // Draw QR Code next to signature line
+      doc.image(qrImage, 560, 470, { width: 60 });
+      doc.font('Helvetica-Bold').fontSize(8).fillColor('#666666').text(`Scan to Verify`, 560, 535, { width: 60, align: 'center' });
+      doc.font('Helvetica').fontSize(7).fillColor('#999999').text(`ID: ${certificateId}`, 550, 545, { width: 80, align: 'center' });
 
       doc.end();
     } catch (error) {
