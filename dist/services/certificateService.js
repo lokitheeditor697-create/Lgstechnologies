@@ -59,10 +59,10 @@ async function generateCertificate(studentName, course, college, domain, startDa
                 const signaturePath = path_1.default.join(process.cwd(), 'public', 'signature.png');
                 const signaturePathAlt = path_1.default.join(process.cwd(), 'public', 'images', 'signature.png');
                 if (fs_1.default.existsSync(signaturePath)) {
-                    doc.image(signaturePath, 415, 455, { width: 125 });
+                    doc.image(signaturePath, 445, 460, { width: 125 });
                 }
                 else if (fs_1.default.existsSync(signaturePathAlt)) {
-                    doc.image(signaturePathAlt, 415, 455, { width: 125 });
+                    doc.image(signaturePathAlt, 445, 460, { width: 125 });
                 }
             }
             else {
@@ -132,10 +132,10 @@ async function generateCertificateBuffer(studentName, course, college, domain, s
                 const signaturePath = path_1.default.join(process.cwd(), 'public', 'signature.png');
                 const signaturePathAlt = path_1.default.join(process.cwd(), 'public', 'images', 'signature.png');
                 if (fs_1.default.existsSync(signaturePath)) {
-                    doc.image(signaturePath, 415, 455, { width: 125 });
+                    doc.image(signaturePath, 445, 460, { width: 125 });
                 }
                 else if (fs_1.default.existsSync(signaturePathAlt)) {
-                    doc.image(signaturePathAlt, 415, 455, { width: 125 });
+                    doc.image(signaturePathAlt, 445, 460, { width: 125 });
                 }
             }
             else {
