@@ -66,6 +66,15 @@ export async function generateCertificate(
         doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
         doc.text(issueDate, 120, 508, { width: 140, align: 'center' });
 
+        // SIGNATURE (bottom right / center signature slot)
+        const signaturePath = path.join(process.cwd(), 'public', 'signature.png');
+        const signaturePathAlt = path.join(process.cwd(), 'public', 'images', 'signature.png');
+        if (fs.existsSync(signaturePath)) {
+          doc.image(signaturePath, 420, 470, { width: 130 });
+        } else if (fs.existsSync(signaturePathAlt)) {
+          doc.image(signaturePathAlt, 420, 470, { width: 130 });
+        }
+
       } else {
         // Fallback drawing if the template isn't uploaded
         doc.rect(20, 20, 801.89, 555.28).lineWidth(5).stroke('#1e3a8a');
@@ -148,6 +157,15 @@ export async function generateCertificateBuffer(
         // DATE (bottom left)
         doc.font('Helvetica-Oblique').fontSize(14).fillColor('#333333');
         doc.text(issueDate, 120, 508, { width: 140, align: 'center' });
+
+        // SIGNATURE (bottom right / center signature slot)
+        const signaturePath = path.join(process.cwd(), 'public', 'signature.png');
+        const signaturePathAlt = path.join(process.cwd(), 'public', 'images', 'signature.png');
+        if (fs.existsSync(signaturePath)) {
+          doc.image(signaturePath, 420, 470, { width: 130 });
+        } else if (fs.existsSync(signaturePathAlt)) {
+          doc.image(signaturePathAlt, 420, 470, { width: 130 });
+        }
 
       } else {
         doc.rect(20, 20, 801.89, 555.28).lineWidth(5).stroke('#1e3a8a');

@@ -93,6 +93,17 @@ router.post('/enroll', authMiddleware, async (req, res) => {
       });
     }
 
+    // Update user's college and phone in database if provided in form
+    if (college || req.body.phone) {
+      await prisma.user.update({
+        where: { id: userId },
+        data: {
+          ...(college ? { college } : {}),
+          ...(req.body.phone ? { phone: req.body.phone } : {})
+        }
+      }).catch(console.error);
+    }
+
     const registration = await prisma.registration.create({
       data: {
         userId,
