@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendCertificateEmail = exports.sendOfferLetterEmail = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
-const PHP_MAILER_URL = process.env.PHP_MAILER_URL || 'https://lgs.aimtechsolutions.in/send_mail.php';
+const PHP_MAILER_URL = process.env.PHP_MAILER_URL || 'https://lgstechnologies.in/send_mail.php';
 // Create fallback transporter using Gmail SMTP
 const transporter = nodemailer_1.default.createTransport({
     service: 'gmail',

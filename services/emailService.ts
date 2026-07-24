@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-const PHP_MAILER_URL = process.env.PHP_MAILER_URL || 'https://lgs.aimtechsolutions.in/send_mail.php';
+const PHP_MAILER_URL = process.env.PHP_MAILER_URL || 'https://lgstechnologies.in/send_mail.php';
 
 // Create fallback transporter using Gmail SMTP
 const transporter = nodemailer.createTransport({
